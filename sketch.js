@@ -64,8 +64,8 @@ function drawSkeleton() {
     pose = poses[i];
         partA = pose.keypoints[3];
         partB = pose.keypoints[4];
-        if(partA=pose.score>0.1&&partB.score>0.1){
-          image(earImg,partA.x,partB.y,50,50)
+        if(partA.score>0.1&&partB.score>0.1){
+          image(earImg,partA.x,partA.y,50,50)
         }
       }
     }
