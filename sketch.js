@@ -8,6 +8,10 @@ https://www.tensorflow.org/hub/tutorials/movenet
 let video, bodypose, pose, keypoint, detector;
 let poses = [];
 
+function preload(){
+  earImg=loadImage("upload_110e9dabac4b33e40bef672c987ab26c")
+}
+
 async function init() {
   const detectorConfig = {
     modelType: poseDetection.movenet.modelType.MULTIPOSE_LIGHTNING,
@@ -58,52 +62,14 @@ function drawSkeleton() {
   // Draw all the tracked landmark points
   for (let i = 0; i < poses.length; i++) {
     pose = poses[i];
-    // shoulder to wrist
-    for (j = 5; j < 9; j++) {
-      if (pose.keypoints[j].score > 0.1 && pose.keypoints[j + 2].score > 0.1) {
-        partA = pose.keypoints[j];
-        partB = pose.keypoints[j + 2];
-        line(partA.x, partA.y, partB.x, partB.y);
+        partA = pose.keypoints[3];
+        partB = pose.keypoints[4];
+        if(partA=pose.score>0.1&&partB.score>0.1){
+          image(earImg,partA.x,partB.y,50,50)
+        }
       }
     }
-    // shoulder to shoulder
-    partA = pose.keypoints[5];
-    partB = pose.keypoints[6];
-    if (partA.score > 0.1 && partB.score > 0.1) {
-      line(partA.x, partA.y, partB.x, partB.y);
-      
-    }
-    // hip to hip
-    partA = pose.keypoints[11];
-    partB = pose.keypoints[12];
-    if (partA.score > 0.1 && partB.score > 0.1) {
-      line(partA.x, partA.y, partB.x, partB.y);
-      
-    }
-    // shoulders to hips
-    partA = pose.keypoints[5];
-    partB = pose.keypoints[11];
-    if (partA.score > 0.1 && partB.score > 0.1) {
-      line(partA.x, partA.y, partB.x, partB.y);
-      
-    }
-    partA = pose.keypoints[6];
-    partB = pose.keypoints[12];
-    if (partA.score > 0.1 && partB.score > 0.1) {
-      line(partA.x, partA.y, partB.x, partB.y);
-      
-    }
-    // hip to foot
-    for (j = 11; j < 15; j++) {
-      if (pose.keypoints[j].score > 0.1 && pose.keypoints[j + 2].score > 0.1) {
-        partA = pose.keypoints[j];
-        partB = pose.keypoints[j + 2];
-        line(partA.x, partA.y, partB.x, partB.y);
-        
-      }
-    }
-  }
-}
+  
 
 /* Points (view on left of screen = left part - when mirrored)
   0 nose
@@ -122,5 +88,8 @@ function drawSkeleton() {
   13 left kneee
   14 right knee
   15 left foot
+  16 right foot
+*/
+
   16 right foot
 */
