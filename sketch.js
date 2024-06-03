@@ -9,7 +9,7 @@ let video, bodypose, pose, keypoint, detector;
 let poses = [];
 
 function preload(){
-  earImg=loadImage("upload_110e9dabac4b33e40bef672c987ab26c")
+  earImg=loadImage("upload_110e9dabac4b33e40bef672c987ab26c.gif")
 }
 
 async function init() {
